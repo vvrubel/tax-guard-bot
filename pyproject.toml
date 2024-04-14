@@ -1,0 +1,129 @@
+[tool.poetry]
+name = "tax-guard-bot"
+version = "0.1.0"
+description = "The telegram-bot helps individual entrepreneurs to manage incomes and taxes"
+authors = ["vvrubel <53346960+vvrubel@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "app"}]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+aiogram = "^3.4.1"
+pydantic = "^2.5.3"
+pydantic-settings = "^2.2.1"
+loguru = "^0.7.2"
+sqlmodel = "^0.0.16"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.3.4"
+mypy = "^1.9.0"
+pytest = "^8.1.1"
+pytest-cov = "^5.0.0"
+pytest-asyncio = "^0.23.6"
+
+
+[tool.poetry.group.local.dependencies]
+pre-commit = "^3.7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+# Ruff configuration
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+output-format = "grouped"
+show-fixes = true
+
+[tool.ruff.lint]
+ignore-init-module-imports = true
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "PL",  # pylint
+    "I",  # isort
+    "N",  # pep8-naming
+    "C",  # flake8-comprehensions
+    "B",  # flake8-bugbear
+    "UP",  # pyupgrade
+    "RUF",  # ruff-specific rules
+    "NPY",  # numpy-specific rules
+]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+
+
+# Mypy configuration
+
+[tool.mypy]
+files = ["app", "tests"]
+python_version = "3.11"
+plugins = [
+  "pydantic.mypy",
+]
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unused_configs = true
+warn_unreachable = true
+show_error_codes = true
+show_error_context = true
+strict = true
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+
+
+# Pytest configuration
+
+[tool.pytest.ini_options]
+markers = [
+    "webtest: mark a test as a webtest."
+]
+required_plugins = [
+    "pytest-asyncio>=0.23.6",
+    "pytest-cov>=5.0.0"
+]
+addopts = [
+  "--strict-config",
+  "--strict-markers",
+  "--cov=app",
+  "--cov-report=xml",
+  "--cov-report=html",
+  "--cov-fail-under=80",
+  "--no-cov-on-fail"
+]
+xfail_strict = true
+junit_family = "xunit2"
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+exclude_also = [
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+ignore_errors = true
+
+[tool.coverage.html]
+directory = "htmlcov"

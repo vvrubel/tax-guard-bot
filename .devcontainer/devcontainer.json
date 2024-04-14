@@ -1,0 +1,49 @@
+{
+    "name": "tax-guard-bot",
+    "image": "mcr.microsoft.com/devcontainers/python:3.11-bullseye",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/vscode/src,type=bind,consistency=cached",
+    "workspaceFolder": "/home/vscode/src",
+    "features": {
+        "ghcr.io/devcontainers-contrib/features/poetry:2": {}
+    },
+    "remoteEnv": {
+        "SHELL": "/bin/bash",
+        "POETRY_VIRTUALENVS_PREFER_ACTIVE_PYTHON": "true"
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "[python]": {
+                    "editor.codeActionsOnSave": {
+                        "source.fixAll": "explicit",
+                        "source.organizeImports": "explicit"
+                    },
+                    "editor.defaultFormatter": "charliermarsh.ruff",
+                    "editor.formatOnSave": true,
+                    "editor.formatOnType": true,
+                    "editor.formatOnPaste": true,
+                    "editor.formatOnSaveMode": "file"
+                }
+            },
+            "extensions": [
+                "ms-python.python",
+                "donjayamanne.python-environment-manager",
+                "ms-toolsai.jupyter",
+                "charliermarsh.ruff",
+                "ms-python.mypy-type-checker",
+                "eamodio.gitlens",
+                "github.remotehub",
+                "githuifb.vscode-github-actions",
+                "github.vscode-pull-request-github",
+                "github.codespaces",
+                "github.copilot",
+                "tamasfe.even-better-toml",
+                "ms-vscode.live-server",
+                "bierner.markdown-mermaid",
+                "mechatroner.rainbow-csv"
+			]
+        }
+    },
+    "postCreateCommand": "poetry install",
+    "postStartCommand": "poetry run pre-commit install && poetry run pre-commit autoupdate"
+}

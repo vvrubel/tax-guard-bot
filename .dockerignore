@@ -1,0 +1,16 @@
+__pycache__
+.mypy_cache
+.pytest_cache
+.ruff_cache
+.env*
+.*ignore
+.pre-commit-config.yaml
+.devcontainer
+Dockerfile
+*.ipynb
+htmlcov
+coverage.*
+.coverage
+
+# if .venv passes to container, it breaks env
+.venv
