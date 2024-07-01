@@ -18,8 +18,8 @@ repos:
     hooks:
     -   id: poetry-check
     -   id: poetry-lock
--   repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.3.7
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.5.0
     hooks:
     -   id: ruff
         args:
